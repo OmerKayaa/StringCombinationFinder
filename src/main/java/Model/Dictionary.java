@@ -1,19 +1,36 @@
 package Model;
 
-import java.math.BigInteger;
-import java.util.List;
+import java.util.Set;
+import java.util.function.BiConsumer;
 
-public interface Dictionary
+public interface Dictionary<k,v>
 {
     /**
+     * This method can also be used to find if key exist
      *
-     * @param integer
-     * @return returns list of String if exist else returns null
+     * @param integer Key value of map
+     * @return List<String> of matches, returns null if no match
      */
+    v findKey(k integer);
 
-    List<String> isKeyExist(BigInteger integer);
-    List<String> createKey(BigInteger integer);
-    void findKey(BigInteger integer);
-    void findWord(String word);
-    void forEach();
+    /**
+     * @param integer Key of the mapping value
+     * @return returns new created list so it wont need to refind it
+     */
+    v createKey(k integer);
+
+    /**
+     *
+     * @param word
+     * @return
+     */
+    k keyOfWord(String word);
+
+    Set<k> keySet();
+
+    boolean isWordExist(String word);
+
+    void addWord(String word);
+
+    void forEach(BiConsumer<k,v> consumer);
 }

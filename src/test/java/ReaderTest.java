@@ -1,25 +1,33 @@
-import Controller.FileReader;
+import Controller.DictionaryReader;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 
 public class ReaderTest
 {
+    private List<String> list = List.of("sample1","sample2","example","new","text","read","write");
     private File file;
 
     @Before
     public void Set()
     {
+        String input = "";
+        for ( String s: list )
+        {
+            input += s + "\n";
+        }
         try
         {
             file = Files.createTempFile("test",".txt").toFile();
-            Files.writeString(file.toPath().toAbsolutePath(),"Deneme1\ndeneme2");
+            Files.writeString(file.toPath().toAbsolutePath(), input);
+
             file.deleteOnExit();
         }
         catch (IOException ex)
@@ -31,6 +39,6 @@ public class ReaderTest
     @Test
     public void testReader()
     {
-        FileReader.ReadFile(file.toPath(), s -> assertTrue(s.equals("Deneme1") || s.equals("deneme2")));
+        DictionaryReader.ReadFile(file.toPath(), s -> assertTrue(list.contains(s)));
     }
 }

@@ -1,3 +1,4 @@
+
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -5,13 +6,28 @@ import org.junit.runner.notification.Failure;
 public class Tester
 {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(ControllerTest.class,ModelTest.class,ViewTest.class,
-                ReaderTest.class,WriterTest.class);
+        Printer(JUnitCore.runClasses(ControllerTest.class, ReaderTest.class,
+                DictionaryTest.class,SearchTest.class, ParallelSearchTest.class),"Main");
+    }
 
-        for (Failure failure : result.getFailures()) {
-            System.out.println(failure.toString());
+    private static void Printer(Result result,String name)
+    {
+        if(result.wasSuccessful())
+        {
+            System.out.println("\t"+ name + " test is finished successfully");
+            PrintLine();
         }
+        else
+        {
+            for (Failure failure : result.getFailures()) {
+                System.out.println(failure.toString());
+            }
+            PrintLine();
+        }
+    }
 
-        System.out.println(result.wasSuccessful()?"\nAll Test Passed":"\nTest Failed");
+    private static void PrintLine()
+    {
+        System.out.println("-----------------------------------------------------");
     }
 }

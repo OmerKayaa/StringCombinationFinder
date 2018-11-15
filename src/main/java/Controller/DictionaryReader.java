@@ -3,15 +3,16 @@ package Controller;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.function.Consumer;
 
-public interface FileReader
+public interface DictionaryReader
 {
 
-    static void ReadFile(Path file,ReadingAction action)
+    static void ReadFile(Path file, Consumer<String> consumer)
     {
         try
         {
-            Files.lines(file).forEach(action::ReadingAction);
+            Files.lines(file).forEach(consumer::accept);
         }
         catch(IOException ex)
         {
@@ -19,9 +20,5 @@ public interface FileReader
         }
     }
 
-    interface ReadingAction
-    {
-        void ReadingAction(String s);
-    }
 
 }
