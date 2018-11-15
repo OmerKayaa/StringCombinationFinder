@@ -2,8 +2,8 @@
 
 #### This is an application for finding word among the letters.
 
-How can i use it?
------------------
+What do i need to use it?
+-------------------------
 * You need a list of valid word written in a txt file and every word should be in a new line
 * You need to know what type of search you want
 
